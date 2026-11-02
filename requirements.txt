@@ -1,0 +1,13 @@
+pandas
+pyarrow
+fastparquet
+numpy
+scikit-learn
+scipy
+torch
+transformers
+accelerate
+tabulate
+duckdb
+ipykernel
+spacy
