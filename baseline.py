@@ -1,41 +1,47 @@
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import HistGradientBoostingRegressor
-from sklearn.model_selection import GroupShuffleSplit
 from helper import evaluate, set_seed
 
 set_seed(42)
 
-print("Loading dataset...")
-df = pd.read_parquet("dataset/yelp_train.parquet")
+print("Loading datasets...")
+df_train = pd.read_parquet("dataset/yelp_train.parquet")
+df_dev = pd.read_parquet("dataset/yelp_dev.parquet")
+
+def build_features(df):
+    """Extracts metadata features directly from raw columns."""
+    df_out = df.copy()
+    df_out["word_count"] = df_out["text"].str.split().str.len()
+    df_out["review_year"] = df_out["date"].dt.year
+    
+    # Because train and dev are split by business_id (no overlap), 
+    # counting within the df accurately reflects the business's frequency in that split.
+    df_out["business_review_count"] = df_out.groupby("business_id")["review_id"].transform("count")
+    return df_out
 
 print("Building metadata features...")
-df["word_count"] = df["text"].str.split().str.len()
-df["review_year"] = df["date"].dt.year
-df["business_review_count"] = df.groupby("business_id")["review_id"].transform("count")
+df_train = build_features(df_train)
+df_dev = build_features(df_dev)
 
 feature_cols = ["word_count", "stars", "review_year", "business_review_count"]
-X = df[feature_cols]
 
-# Line 227: Target is log(1 + useful)
-y = np.log1p(df["useful"])
+X_train = df_train[feature_cols]
+# Target is log(1 + useful)
+y_train = np.log1p(df_train["useful"])
 
-# Line 218: Split by business_id so no restaurant is in both train and val
-splitter = GroupShuffleSplit(n_splits=1, test_size=0.15, random_state=42)
-train_idx, val_idx = next(splitter.split(X, y, groups=df["business_id"]))
+X_dev = df_dev[feature_cols]
+y_dev = np.log1p(df_dev["useful"])
 
-X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
-y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]
-
-# Line 305: Gradient Boosted Decision Tree
-print("Training GBDT Metadata Baseline...")
+# Gradient Boosted Decision Tree
+print(f"Training GBDT Metadata Baseline on {len(X_train)} train rows...")
 model = HistGradientBoostingRegressor(random_state=42)
 model.fit(X_train, y_train)
 
-print("Evaluating on validation split...")
-val_preds = model.predict(X_val)
-metrics = evaluate(y_val, val_preds)
+print(f"Evaluating on {len(X_dev)} dev rows...")
+dev_preds = model.predict(X_dev)
+metrics = evaluate(y_dev, dev_preds)
 
-print("\nMetadata Baseline Results (log scale):")
+print("\nMetadata Baseline Results (log scale) on Yelp Dev:")
 for name, val in metrics.items():
     print(f"{name}: {val:.4f}")
