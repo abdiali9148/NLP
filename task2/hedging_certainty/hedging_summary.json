@@ -1,0 +1,410 @@
+{
+  "train": {
+    "rows": 398664,
+    "hedge_rate_mean": 0.06808777352423528,
+    "hedge_rate_median": 0.0,
+    "certainty_rate_mean": 0.02382538921528965,
+    "certainty_rate_median": 0.0,
+    "zero_hedge_pct": 52.72234262436538,
+    "zero_certainty_pct": 77.19884413942569,
+    "zero_both_pct": 42.82628980795858,
+    "top_10_hedges": [
+      [
+        "a bit",
+        49060
+      ],
+      [
+        "i think",
+        39873
+      ],
+      [
+        "probably",
+        37097
+      ],
+      [
+        "maybe",
+        36393
+      ],
+      [
+        "seemed",
+        26221
+      ],
+      [
+        "kind of",
+        25272
+      ],
+      [
+        "might",
+        22582
+      ],
+      [
+        "seems",
+        17823
+      ],
+      [
+        "not sure",
+        15059
+      ],
+      [
+        "seem",
+        14360
+      ]
+    ],
+    "top_10_certainty": [
+      [
+        "definitely",
+        78686
+      ],
+      [
+        "clearly",
+        8835
+      ],
+      [
+        "obviously",
+        7712
+      ],
+      [
+        "i'm sure",
+        6093
+      ],
+      [
+        "for sure",
+        5998
+      ],
+      [
+        "surely",
+        1514
+      ],
+      [
+        "no doubt",
+        1127
+      ],
+      [
+        "guarantee",
+        843
+      ],
+      [
+        "without a doubt",
+        682
+      ],
+      [
+        "guaranteed",
+        676
+      ]
+    ],
+    "top_10_overall": [
+      [
+        "definitely",
+        78686
+      ],
+      [
+        "a bit",
+        49060
+      ],
+      [
+        "i think",
+        39873
+      ],
+      [
+        "probably",
+        37097
+      ],
+      [
+        "maybe",
+        36393
+      ],
+      [
+        "seemed",
+        26221
+      ],
+      [
+        "kind of",
+        25272
+      ],
+      [
+        "might",
+        22582
+      ],
+      [
+        "seems",
+        17823
+      ],
+      [
+        "not sure",
+        15059
+      ]
+    ]
+  },
+  "dev": {
+    "rows": 51897,
+    "hedge_rate_mean": 0.06778309853797868,
+    "hedge_rate_median": 0.0,
+    "certainty_rate_mean": 0.024024488140399307,
+    "certainty_rate_median": 0.0,
+    "zero_hedge_pct": 52.49436383605989,
+    "zero_certainty_pct": 76.81368865252327,
+    "zero_both_pct": 42.38009904233385,
+    "top_10_hedges": [
+      [
+        "a bit",
+        6418
+      ],
+      [
+        "i think",
+        5244
+      ],
+      [
+        "probably",
+        4877
+      ],
+      [
+        "maybe",
+        4795
+      ],
+      [
+        "kind of",
+        3279
+      ],
+      [
+        "seemed",
+        3279
+      ],
+      [
+        "might",
+        3011
+      ],
+      [
+        "seems",
+        2264
+      ],
+      [
+        "not sure",
+        2035
+      ],
+      [
+        "seem",
+        1832
+      ]
+    ],
+    "top_10_certainty": [
+      [
+        "definitely",
+        10422
+      ],
+      [
+        "clearly",
+        1215
+      ],
+      [
+        "obviously",
+        950
+      ],
+      [
+        "for sure",
+        834
+      ],
+      [
+        "i'm sure",
+        807
+      ],
+      [
+        "surely",
+        226
+      ],
+      [
+        "no doubt",
+        134
+      ],
+      [
+        "guarantee",
+        117
+      ],
+      [
+        "without a doubt",
+        93
+      ],
+      [
+        "guaranteed",
+        88
+      ]
+    ],
+    "top_10_overall": [
+      [
+        "definitely",
+        10422
+      ],
+      [
+        "a bit",
+        6418
+      ],
+      [
+        "i think",
+        5244
+      ],
+      [
+        "probably",
+        4877
+      ],
+      [
+        "maybe",
+        4795
+      ],
+      [
+        "kind of",
+        3279
+      ],
+      [
+        "seemed",
+        3279
+      ],
+      [
+        "might",
+        3011
+      ],
+      [
+        "seems",
+        2264
+      ],
+      [
+        "not sure",
+        2035
+      ]
+    ]
+  },
+  "test": {
+    "rows": 47184,
+    "hedge_rate_mean": 0.06798124980616979,
+    "hedge_rate_median": 0.0,
+    "certainty_rate_mean": 0.024188811040597526,
+    "certainty_rate_median": 0.0,
+    "zero_hedge_pct": 52.77848423194303,
+    "zero_certainty_pct": 77.19354018311292,
+    "zero_both_pct": 42.74330281451339,
+    "top_10_hedges": [
+      [
+        "a bit",
+        5604
+      ],
+      [
+        "i think",
+        4739
+      ],
+      [
+        "probably",
+        4509
+      ],
+      [
+        "maybe",
+        4333
+      ],
+      [
+        "kind of",
+        2958
+      ],
+      [
+        "seemed",
+        2911
+      ],
+      [
+        "might",
+        2641
+      ],
+      [
+        "seems",
+        2065
+      ],
+      [
+        "not sure",
+        1704
+      ],
+      [
+        "seem",
+        1699
+      ]
+    ],
+    "top_10_certainty": [
+      [
+        "definitely",
+        9418
+      ],
+      [
+        "clearly",
+        986
+      ],
+      [
+        "obviously",
+        898
+      ],
+      [
+        "i'm sure",
+        764
+      ],
+      [
+        "for sure",
+        693
+      ],
+      [
+        "surely",
+        187
+      ],
+      [
+        "no doubt",
+        125
+      ],
+      [
+        "guarantee",
+        91
+      ],
+      [
+        "without a doubt",
+        90
+      ],
+      [
+        "guaranteed",
+        66
+      ]
+    ],
+    "top_10_overall": [
+      [
+        "definitely",
+        9418
+      ],
+      [
+        "a bit",
+        5604
+      ],
+      [
+        "i think",
+        4739
+      ],
+      [
+        "probably",
+        4509
+      ],
+      [
+        "maybe",
+        4333
+      ],
+      [
+        "kind of",
+        2958
+      ],
+      [
+        "seemed",
+        2911
+      ],
+      [
+        "might",
+        2641
+      ],
+      [
+        "seems",
+        2065
+      ],
+      [
+        "not sure",
+        1704
+      ]
+    ]
+  }
+}

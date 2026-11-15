@@ -122,9 +122,17 @@ def load_merged(features_path: Path, reviews_path: Path, text_col: str, split: s
     frame = frame.drop(columns="_merge")
     if not pd.api.types.is_numeric_dtype(frame["n_sents"]):
         raise ValueError(f"{split}: n_sents is not numeric")
-    if frame["n_sents"].isna().any() or (frame["n_sents"] <= 0).any():
-        bad = int(((frame["n_sents"] <= 0) | frame["n_sents"].isna()).sum())
-        raise ValueError(f"{split}: {bad} rows have null/zero/negative n_sents; cannot divide by 0")
+    invalid = frame["n_sents"].isna() | (frame["n_sents"] < 0)
+    if invalid.any():
+        raise ValueError(f"{split}: {int(invalid.sum())} invalid sentence counts")
+    zero = frame.loc[frame["n_sents"].eq(0)]
+    if len(zero):
+        known = (split == "train" and len(zero) == 1
+                 and zero.iloc[0]["review_id"] == "kP1cezh1boBbSk5n0fy3mw"
+                 and str(zero.iloc[0][text_col]).strip() == ":(")
+        if not known:
+            raise ValueError(f"{split}: unexpected zero-sentence reviews")
+        print(f"{split}: known emoticon-only review; zero rates applied")
     return frame
 
 
@@ -211,8 +219,12 @@ def main() -> None:
         counts, h_counter, c_counter, h_hits, c_hits = extract_features(frame[args.text_col], hedges, certainty)
         frame["hedge_count"] = counts["hedge_count"].to_numpy()
         frame["certainty_count"] = counts["certainty_count"].to_numpy()
-        frame["hedge_rate"] = frame["hedge_count"] / frame["n_sents"]
-        frame["certainty_rate"] = frame["certainty_count"] / frame["n_sents"]
+        zero = frame["n_sents"].eq(0)
+        if (frame.loc[zero, ["hedge_count", "certainty_count"]] != 0).any().any():
+            raise ValueError(f"{split}: matches in zero-sentence review")
+        denominator = frame["n_sents"].mask(zero, 1)
+        frame["hedge_rate"] = frame["hedge_count"] / denominator
+        frame["certainty_rate"] = frame["certainty_count"] / denominator
         report[split] = summary(frame, h_counter, c_counter)
         prefix = "pilot" if args.pilot_only else "spotcheck"
         audit_path = out_dir / f"{prefix}_matches_{split}.csv"

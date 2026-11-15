@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 .DS_Store
 dataset/
+task2/yelp/
+*.bak
