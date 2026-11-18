@@ -1,0 +1,7 @@
+{
+  "source_reviews": 701528,
+  "retained_reviews": 54372,
+  "unique_products": 19078,
+  "minimum_votes": 3,
+  "output_file": "amazon_all_beauty_votes3.parquet"
+}

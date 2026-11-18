@@ -3,4 +3,5 @@ __pycache__/
 *.pyc
 .DS_Store
 dataset/
-*.parquet
+task2/yelp/
+*.bak
